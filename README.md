@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="assets/eyes-peeled-logo.png" alt="Eyes Peeled" width="600"/>
+  <img src="assets/eyes-peeled-logo.png?raw=true" alt="Eyes Peeled" width="600"/>
   
   <br/>
   <br/>
