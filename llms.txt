@@ -1,0 +1,52 @@
+# Eyes Peeled
+
+> WCAG contrast and accessibility validator. Checks color combinations against WCAG 2.1 standards, generates compliant alternatives while preserving design intent. Uses CIELAB color space for perceptual accuracy.
+
+## What it does
+
+Validates color pairs against WCAG 2.1 (AA/AAA for normal text, large text, and UI components). When combinations fail, generates minimal adjustments using LAB color space to preserve hue and saturation. Audits entire palettes with matrix analysis.
+
+## Core functions
+
+```python
+# Check a single pair
+result = check_wcag(hex_to_rgb('#2563eb'), hex_to_rgb('#ffffff'))
+# Returns: ratio, AA_normal, AA_large, AAA_normal, AAA_large, UI_component
+
+# Generate fixes for failing pairs
+fixes = generate_fixes(fg_rgb, bg_rgb, target_ratio=4.5)
+# Returns: strategies (darken_foreground, lighten_background, balanced)
+
+# Audit an entire palette
+results = audit_palette({'primary': '#3b82f6', 'secondary': '#8b5cf6', ...})
+# Returns: all combinations, safe backgrounds/foregrounds, problem colors, stats
+
+# Generate accessible variants
+variants = generate_accessible_variants('#60a5fa', '#ffffff', levels=['AA', 'AAA'])
+```
+
+## WCAG thresholds
+
+- AA Normal Text: 4.5:1
+- AA Large Text: 3:1 (18pt+ or 14pt+ bold)
+- AAA Normal Text: 7:1
+- AAA Large Text: 4.5:1
+- UI Components: 3:1
+
+## Fix strategies
+
+1. Darken foreground only (preserve background)
+2. Lighten background only (preserve foreground)
+3. Balanced adjustment (both colors move minimally)
+
+All fixes preserve hue and saturation, adjusting only lightness in CIELAB space.
+
+## Part of a suite
+
+Hexed (colors) + Specimen (typography) + Gridlock (layout) + Eyes Peeled (accessibility) + Devourer (components)
+
+Quality gate: run Eyes Peeled after Hexed to validate palette accessibility before generating components with Devourer.
+
+## Author
+
+Created by Heathen
